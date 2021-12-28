@@ -1,5 +1,6 @@
 const $GV = new Map();
 const EventEmitter = require('events');
+const { TopologyDescriptionChangedEvent } = require('mongodb');
 class BGlobal extends EventEmitter {
     constructor(emit=true){
       super();
@@ -127,9 +128,19 @@ class BValue extends EventEmitter {
         this.base.set(this.key, this);
     }
 }
-
-// function betterize(v){
-//     // Betterize value
-//     let vBetter = new BValue(v, time);
-//     return vBetter;
-// }
+function bv(v, data){
+    /*
+     data {
+         key: value key - if null it will use incrementation
+         base: BGlobal instance
+         dontSaveGlobal: if true it will not save in global (at creation) the value, it can be saved with save() method tho
+     }
+    */
+    var BValueInst = new BValue(data.base, v, (data.key||`${data.base.coll.length+1}`), (data.dontSaveGlobal ? false : true));
+    return BValueInst;
+}
+module.exports = {
+    BGlobal,
+    BValue,
+    BV: bv
+};
