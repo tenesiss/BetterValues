@@ -133,25 +133,3 @@ class BValue extends EventEmitter {
 //     let vBetter = new BValue(v, time);
 //     return vBetter;
 // }
-var bbase_test = new BGlobal();
-var bValuetest = new BValue(bbase_test, "hola", "hola_val");
-bValuetest.on("valueUpdate", () => {
-    console.log('fcuniona broooo')
-});
-bValuetest.log();
-bValuetest.update("patata");
-bValuetest.log();
-console.log(bValuetest.cache);
-console.log(bbase_test.coll);
-setTimeout(() => {
-    bValuetest.update("prueba 3");
-    console.log(bValuetest.cache);
-}, 5000);
-setTimeout(() => {
-    bValuetest.update("prueba 6");
-    console.log(bValuetest.cache);
-}, 12000);
-setTimeout(() => {
-    bValuetest.resetCache(true);
-    console.log(bValuetest.cache);
-}, 15000);
