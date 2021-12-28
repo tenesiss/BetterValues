@@ -5,7 +5,7 @@ class BGlobal extends EventEmitter {
       super();
       this.coll = new Map();
       if(typeof emit != "boolean") {
-          throw new Error("Property BGlobal.emitOn must be boolean, debugt<>");
+          throw new TypeError("Property BGlobal.emitOn must be boolean, debugt<>");
       }
       this.emitOn = emit;
     }
