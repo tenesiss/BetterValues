@@ -85,6 +85,7 @@ class BValue extends EventEmitter {
           if(avoidEmit == false){
             this.emit("propChanged", { name: propName, newValue: propVal });
           }
+          return this.val;
       }
     }
     delete(options={}){
@@ -104,6 +105,7 @@ class BValue extends EventEmitter {
       if(options.saveOldValueOnCache){
           this.cache.push(auxV);
       }
+      return true;
     }
     resetCache(keepLastValue = false){
        if(keepLastValue == true){
@@ -113,9 +115,11 @@ class BValue extends EventEmitter {
        if(lastVal){
            this.cache.push(lastVal);
        }
+       return this.cache;
     }
     log(){
         console.log(this.val);
+        return true;
     }
     obj(){
         return this.val;
@@ -126,6 +130,7 @@ class BValue extends EventEmitter {
             throw new Error("Key must be a valid string!");
         }
         this.base.set(this.key, this);
+        return true;
     }
 }
 function bv(v, data){
